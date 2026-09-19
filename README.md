@@ -1,51 +1,44 @@
 # AQ Analyzer
 
-**Offline audio mastering analysis for Android.** *(working name)*
+**Audio Quality Analyzer** — an Android app for audiophiles that performs *professional-grade technical analysis of audio mastering quality*, 100% on-device. No cloud, no upload, no account.
 
-AQ Analyzer is an Android app for audiophiles that performs professional-grade
-technical analysis of audio files — 100% on-device. No cloud, no upload, no
-account. Your music never leaves your phone.
+## Features
 
-## What it does
+| Feature | Description |
+|---|---|
+| Dynamic Range (DR) | DR14 algorithm (Pleasurize Music Foundation), implemented natively in Kotlin |
+| Level metrics | peak, true peak, RMS, integrated LUFS, loudness range |
+| Spectrogram | full-track spectrogram, visual inspection of the master |
+| Fake lossless detection | spots FLAC files secretly transcoded from MP3 (brick-wall cut-off, upsampling) |
+| Master comparison | side-by-side analysis of two pressings of the same album |
 
-- **Dynamic Range (DR)** — DR14 algorithm (Pleasurize Music Foundation),
-  implemented natively in Kotlin
-- **Level metrics** — peak, true peak, RMS, integrated LUFS, loudness range
-- **Full-track spectrogram** — visual inspection of the master
-- **Fake lossless detection** — spots FLAC files secretly transcoded from MP3
-  (brick-wall cut-off, upsampling)
-- **Master comparison** — side-by-side analysis of two pressings of the same album
-
-Reads local files (FLAC, WAV, ALAC, AIFF, MP3, AAC, OGG, OPUS) via the Android
-file picker. Analysis of a typical hi-res track takes seconds.
-
-## Why
-
-Audiophiles today choose between cloud-based analyzers (privacy concerns,
-upload required) and desktop tools (accurate, but not portable). AQ Analyzer
-aims for desktop-grade accuracy in your pocket, fully offline.
+Reads local files (FLAC, WAV, ALAC, AIFF, MP3, AAC, OGG, OPUS) via the Android file picker.
 
 ## Status
 
-**Early proof of concept.** The DR14 measurement core is being validated
-against reference tools (foo_dr_meter, dr14meter) on known reference masters.
-See [`poc/`](poc/) for the Termux-based prototype used for validation.
+Early proof of concept, Phase 1 (M1.x milestones). See roadmap below.
+
+| Milestone | Scope | Status |
+|---|---|---|
+| M1.1 | Kotlin/Compose skeleton, forced dark theme, CI (tests + APK artifact) | ✅ |
+| M1.2 | DR calculator per foo_dr_meter 1.0.8 spec (pure Kotlin, TDD) | planned |
+| M1.3 | Audio decoder → PCM (FFmpegKit) | planned |
+| M1.4 | File picker + metrics screen + history (Room) | planned |
+
+The DR14 measurement core prototype lives in [`poc/`](poc/).
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| Language | Kotlin |
-| UI | Jetpack Compose, Material 3 |
-| Audio processing | FFmpegKit |
-| Database | Room (SQLite) |
-| Min Android | API 30 (Android 11) |
+Kotlin 2.0, Jetpack Compose (Material 3, forced dark theme), Hilt, KSP, Room, FFmpegKit (from M1.3).
 
-## Roadmap
+## Build
 
-1. **PoC** — single-file analysis: DR, levels, spectrogram
-2. **MVP** — LUFS, fake-lossless detection, master comparison, history
-3. **Premium** — on-device AI explanations of the analysis (English, offline)
+```bash
+./gradlew assembleDebug      # build
+./gradlew testDebugUnitTest   # unit tests
+```
+
+Requires JDK 17 and Android SDK 35.
 
 ## License
 
