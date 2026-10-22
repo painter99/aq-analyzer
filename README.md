@@ -2,6 +2,8 @@
 
 **Audio Quality Analyzer** — an Android app for audiophiles that performs *professional-grade technical analysis of audio mastering quality*, 100% on-device. No cloud, no upload, no account.
 
+> ⚠️ **Archived (October 2026).** This Android proof of concept was put to sleep at M1.1 (skeleton + CI). The planned on-device analyzer never grew past the skeleton; development continues as a private headless desktop workflow. The DR14 measurement core in [`poc/`](poc/) remains the reference implementation.
+
 ## Features
 
 | Feature | Description |
